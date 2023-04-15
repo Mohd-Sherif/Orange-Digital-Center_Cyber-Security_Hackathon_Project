@@ -65,3 +65,10 @@ else
 		nuclei -u $vict -o "$vict"_vulns.html
 	done
 
+	echo "++++++ Directories Scan ++++++"
+	rm *_gobuster_results.html
+	for dir in $(cat valid.txt)
+	do
+		gobuster dir -u $dir -w /usr/share/wordlists/dirb/common.txt --wildcard -o "$dir"_gobuster_results.html
+	done
+
