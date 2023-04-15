@@ -46,3 +46,15 @@ else
 		cd ..
 	done
 
+        echo "++++++ Grepping IPs ++++++"
+        echo "****** May take some time ******"
+        if [ -a IPs.txt ]
+        then
+                rm IPs.txt
+        fi
+        for ip in $(cat valid.txt)
+        do
+                host $ip | grep "has address" | cut -d " " -f 4 >> IPs.txt
+        done
+        cat IPs.txt
+
