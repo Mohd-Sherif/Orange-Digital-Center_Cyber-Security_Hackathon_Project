@@ -32,3 +32,17 @@ else
                 fi
         done
 
+	echo "++++++ Taking Screenshots ++++++"
+	if [ -d ./screenshots ]
+	then
+		rm -rf ./screenshots
+	fi
+	mkdir screenshots
+	for valid_sub in $(cat valid.txt)
+	do
+		cd screenshots
+		capture-website https://$valid_sub --output=$valid_sub.png
+		echo "$valid_sub ++++ Done"
+		cd ..
+	done
+
