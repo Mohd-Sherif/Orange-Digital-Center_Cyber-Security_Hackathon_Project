@@ -58,3 +58,10 @@ else
         done
         cat IPs.txt
 
+	echo "++++++ Vuln Scan ++++++"
+	rm *_vulns.html
+	for vict in $(cat valid.txt)
+	do
+		nuclei -u $vict -o "$vict"_vulns.html
+	done
+
