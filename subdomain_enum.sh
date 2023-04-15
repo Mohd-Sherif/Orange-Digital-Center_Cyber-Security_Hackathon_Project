@@ -16,3 +16,19 @@ else
 	fi
 	subfinder -d $1 -o subdomains.txt
 
+        echo "++++++ Checking Validation ++++++"
+        if [ -a valid.txt ]
+        then
+                rm valid.txt
+        fi
+        for sub in $(cat subdomains.txt)
+        do
+                if [[ $(ping -c 1 $sub 2> /dev/null) ]]
+                then
+                        echo "$sub ++++++ Valid"
+                        echo $sub >> valid.txt
+                else
+                        echo "$sub ------ Error"
+                fi
+        done
+
