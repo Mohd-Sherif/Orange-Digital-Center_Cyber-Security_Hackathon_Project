@@ -72,3 +72,13 @@ else
 		gobuster dir -u $dir -w /usr/share/wordlists/dirb/common.txt --wildcard -o "$dir"_gobuster_results.html
 	done
 
+	echo "++++++ Initializing the Results in a web page ++++++"
+	if [ -a RESULTS.html ]
+	then
+		rm RESULTS.html
+	fi
+	pandoc -s *.html -o RESULTS.html --metadata title="Final Results"
+	xdg-open RESULTS.html
+
+	echo "++++++ The Scan Finished Successfully ++++++"
+fi
